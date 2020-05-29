@@ -42,7 +42,7 @@ class _MyHomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
         ),
       ),
-      floatingActionButton: buildOptionsFAB(),
+      floatingActionButton: buildOptionsFAB(context),
     );
   }
 }
