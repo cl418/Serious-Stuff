@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:serious_stuff/components/Fab.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:serious_stuff/SharedPreferencesHelper.dart' as Preferences;
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -24,9 +24,9 @@ class _MyHomePageState extends State<HomePage> {
   bool isMenuLeft = false;
 
   Future<Null> getSharedPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool tempIsMenuLeft = await Preferences.SharedPreferencesHelper.getMenuLeft();
     setState(() {
-      isMenuLeft = prefs.getBool("isMenuLeft");
+      isMenuLeft = tempIsMenuLeft;
     });
   }
 
