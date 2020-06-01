@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:serious_stuff/constants.dart' as Constants;
+import 'package:serious_stuff/screens/SettingsPage.dart' as Settings;
 
-SpeedDial buildOptionsFAB() {
+SpeedDial buildOptionsFAB(BuildContext context, bool isMenuLeft) {
+  double currentPos = 18;
+  if (isMenuLeft) {
+    currentPos = MediaQuery.of(context).size.width - 80;
+  }
+
   // The options floating action button.
   return SpeedDial(
-    marginRight: 18,
+    marginRight: currentPos,
     marginBottom: 20,
     animatedIcon: AnimatedIcons.menu_close,
     animatedIconTheme: IconThemeData(size: 22.0),
@@ -24,17 +30,19 @@ SpeedDial buildOptionsFAB() {
     shape: CircleBorder(),
     children: [
       SpeedDialChild(
-          child: Icon(Icons.search),
-          backgroundColor: Constants.primaryColorLight,
-          label: 'Search a room',
-          labelStyle: TextStyle(fontSize: 16.0),
-          onTap: () => print('SEARCH')),
-      SpeedDialChild(
         child: Icon(Icons.settings),
         backgroundColor: Constants.primaryColorLight,
-        label: 'Settings',
-        labelStyle: TextStyle(fontSize: 16.0),
-        onTap: () => print('SETTINGS'),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Settings.SettingsPage())
+          );
+        },
+      ),
+      SpeedDialChild(
+          child: Icon(Icons.search),
+          backgroundColor: Constants.primaryColorLight,
+          onTap: () => print('SEARCH')
       ),
     ],
   );

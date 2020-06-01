@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:serious_stuff/components/Fab.dart';
-
+import 'package:serious_stuff/SharedPreferencesHelper.dart' as Preferences;
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -21,8 +21,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
+  bool isMenuLeft = false;
+
+  Future<Null> getSharedPrefs() async {
+    bool tempIsMenuLeft = await Preferences.SharedPreferencesHelper.getMenuLeft();
+    setState(() {
+      isMenuLeft = tempIsMenuLeft;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    getSharedPrefs();
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -42,7 +52,7 @@ class _MyHomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
         ),
       ),
-      floatingActionButton: buildOptionsFAB(),
+      floatingActionButton: buildOptionsFAB(context, isMenuLeft),
     );
   }
 }
