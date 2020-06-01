@@ -30,7 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       builder: (context, snapshot) {
                         return Switch(
                           value: snapshot.data,
-                          onChanged: (value){
+                          onChanged: (value) {
                             print("changing menu on left to: $value");
                             setState(() {
                               Preferences.SharedPreferencesHelper.setMenuLeft(value);

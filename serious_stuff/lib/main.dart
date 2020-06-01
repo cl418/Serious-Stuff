@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Serious Stuff',
+      title: Constants.title,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Constants.primaryColor,
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColorLight: Constants.primaryColorLight,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(title: 'Serious Stuff'),
+      home: HomePage(title: Constants.title),
     );
   }
 }
