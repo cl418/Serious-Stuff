@@ -1,5 +1,10 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:serious_stuff/components/Fab.dart';
+import 'package:location/location.dart';
+
+import 'MapPage.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -21,6 +26,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
+  Location location = new Location();
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+  LocationData _locationData;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkLocationPermission();
+  }
+
+  void _checkLocationPermission() async {
+    _serviceEnabled = await location.serviceEnabled();
+    if(!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    _locationData = await location.getLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -35,13 +69,7 @@ class _MyHomePageState extends State<HomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
-      ),
+      body: googleMap(),
       floatingActionButton: buildOptionsFAB(),
     );
   }
