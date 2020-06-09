@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:serious_stuff/components/Fab.dart';
 import 'package:location/location.dart';
@@ -39,7 +37,7 @@ class _MyHomePageState extends State<HomePage> {
 
   void _checkLocationPermission() async {
     _serviceEnabled = await location.serviceEnabled();
-    if(!_serviceEnabled) {
+    if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
       if (!_serviceEnabled) {
         return;

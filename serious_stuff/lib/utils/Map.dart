@@ -46,8 +46,7 @@ class _MapState extends State<Map> {
     final String markerIdVal = 'marker_id_$_markerIdCounter';
     _markerIdCounter++;
     setState(() {
-      print(
-        'Marker | Latitude: ${point.latitude} Longitude: ${point.longitude}');
+      print('Marker | Latitude: ${point.latitude} Longitude: ${point.longitude}');
       _markers.add(
         Marker(
           markerId: MarkerId(markerIdVal),
@@ -87,6 +86,7 @@ class _MapState extends State<Map> {
         )
     );
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
