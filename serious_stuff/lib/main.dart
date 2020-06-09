@@ -3,7 +3,6 @@ import 'package:serious_stuff/screens/HomePage.dart';
 import 'package:serious_stuff/constants.dart' as Constants;
 
 void main() {
-
   runApp(MyApp());
 }
 

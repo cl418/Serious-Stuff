@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 Completer<GoogleMapController> _controller = Completer();
 
-const LatLng _center = const LatLng(49.2780947,-122.9373926);
+const LatLng _center = const LatLng(49.2780947, -122.9373926);
 
 void _onMapCreated(GoogleMapController controller) {
   _controller.complete(controller);
